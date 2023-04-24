@@ -71,35 +71,20 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('product.list') }}">
+                    <a class="nav-link" href="{{ route('company.list') }}">
                         <i class="link-icon" data-feather="box"></i>
-                        <span class="menu-title">Product</span>
+                        <span class="menu-title">Companies</span>
                     </a>
                 </li>
 
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('project.list') }}">
+                    <a class="nav-link" href="{{ route('contact.list') }}">
                         <i class="link-icon" data-feather="box"></i>
-                        <span class="menu-title">Projects</span>
+                        <span class="menu-title">Contacts</span>
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('category.list') }}">
-                        <i class="link-icon" data-feather="box"></i>
-                        <span class="menu-title">Categories</span>
-                    </a>
-                </li>
-
-               
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('transactions.list') }}">
-                        <i class="link-icon" data-feather="box"></i>
-                        <span class="menu-title">Stock Report</span>
-                    </a>
-                </li>
                
             </ul>
         </div>

@@ -39,21 +39,21 @@ class PermissionsDemoSeeder extends Seeder
 
         // create demo users
         $user = User::create([
-            'name' => 'Example User',
+            'first_name' => 'Example User',
             'email' => 'test@example.com',
             'password' => bcrypt("123456"),
         ]);
         $user->assignRole($role1);
 
         $user = User::create([
-            'name' => 'Example Admin User',
+            'first_name' => 'Example Admin User',
             'email' => 'admin@example.com',
             'password' => bcrypt("123456"),
         ]);
         $user->assignRole($role2);
 
         $user = User::create([
-            'name' => 'Example Super-Admin User',
+            'first_name' => 'Example Super-Admin User',
             'email' => 'superadmin@example.com',
             'password' => bcrypt("123456"),
         ]);
