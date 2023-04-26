@@ -2,20 +2,7 @@
     <nav class="navbar top-navbar">
         <div class="container">
             <div class="navbar-content">
-                {{-- <a href="#" class="navbar-brand">
-                    <img src="{{ asset('frontend/img/cropped-logo.png') }}" class="w-16-main" alt="">
-                </a> --}}
-                <form class="search-form">
-                    <div class="input-group">
-                        <div class="input-group-text">
-                            <i data-feather="search"></i>
-                        </div>
-                        <input type="text" class="form-control" id="navbarForm" placeholder="Search here...">
-                    </div>
-                </form>
                 <ul class="navbar-nav">
-
-                  
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,23 +56,18 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('company.list') }}">
                         <i class="link-icon" data-feather="box"></i>
                         <span class="menu-title">Companies</span>
                     </a>
                 </li>
-
-
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('contact.list') }}">
                         <i class="link-icon" data-feather="box"></i>
                         <span class="menu-title">Contacts</span>
                     </a>
                 </li>
-
-               
             </ul>
         </div>
     </nav>

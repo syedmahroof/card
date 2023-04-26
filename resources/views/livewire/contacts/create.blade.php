@@ -4,7 +4,7 @@
             <form wire:submit.prevent="storePost" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-12 grid-margin">
-                        <h4 class="card-title">Create New Service </h4>
+                        <h4 class="card-title">Create Contact </h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -26,10 +26,24 @@
                                 </div>
                             </div>
                         </div>
-                       
 
                         <div class="row">
-                    
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Categories</label>
+                                    <select class="js-example-basic-single form-select" wire:model="company_id"
+                                        data-width="100%">
+                                        <option value="" >Please Select</option>
+                                        @foreach ($this->companies as $company)
+                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('company_id')
+                                        <span style="color:red" class="error"> * {{ $message }} <br> </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="col-md-3">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Employee Number</label>
@@ -189,7 +203,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <input class="btn btn-primary" type="submit" value="Submit"> --}}
+       
                         <button class="btn btn-primary  btn-block max-width-button" type="submit"
                             value="Submit">Submit</button>
                         <button wire:click.prevent="cancelPost()"
@@ -197,9 +211,7 @@
                         <input type="hidden" wire:model="property_id">
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
 </div>

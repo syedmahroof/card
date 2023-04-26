@@ -2,7 +2,7 @@
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Products</li>
+            <li class="breadcrumb-item active" aria-current="page">Contacts</li>
         </ol>
     </nav>
 
@@ -13,7 +13,7 @@
                 <div class="card-body">
 
                     @if (!$addData)
-                        <button wire:click="addPost()" class="btn btn-primary btn-sm float-right">Add Contact</button>
+                        <button wire:click="addPost()" class="btn btn-danger btn-sm float-right">Add Contact</button>
                     @endif
                     <div class="table-responsive">
                         <table class="table">
@@ -61,13 +61,14 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                   
+                                                    {{ (isset($contact->company) && isset($contact->company->name)) ? $contact->company->name : '' }}
+                                                    
                                                 </div>
 
                                             </td>
                                             <td>
                                                 <div>
-                                                   
+                                                    {{ $contact->designation }}
                                                 </div>
 
                                             </td>
@@ -86,10 +87,10 @@
                                                 {{-- <button wire:click="viewData({{ $contact->id }})"
                                                     class="btn btn-primary btn-xs btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"><i data-feather="edit"></i></button> --}}
                                                 <button wire:click="editPost({{ $contact->id }})"
-                                                    class="btn btn-primary btn-xs btn-icon">
+                                                    class="btn btn-primary  btn-xs btn-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
                                                 <button wire:click="confirmData({{ $contact->id }})"
-                                                    class="btn btn-danger btn-xs btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+                                                    class="btn btn-danger  btn-xs btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
                                                 <button wire:click="changeStatus({{ $contact->id }})"
                                                     class="btn btn-secondary btn-xs btn-icon">
                                                     {{-- @if ($contact->status)
@@ -104,7 +105,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="4" align="center">
+                                        <td colspan="9" align="center">
                                             No Data Found.
                                         </td>
                                     </tr>
@@ -128,5 +129,3 @@
     </div>
 </div>
 
-
-<x-confirmation-alert />

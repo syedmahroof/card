@@ -53,16 +53,16 @@
     <script src="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <!-- end base js -->
-    <!-- plugin js -->
+
+
     @stack('plugin-scripts')
     <!-- end plugin js -->
     <!-- common js -->
     <script src="{{ asset('assets/js/template.js') }}"></script>
     <!-- end common js -->
     @stack('custom-scripts')
-    @stack('confirmation-scripts')
     @livewireScripts
+    
 
 </body>
 

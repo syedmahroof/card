@@ -14,8 +14,8 @@ class Details extends Component
     use WithPagination;
 
     protected $listeners = ['deleteConfirmed' => 'deleteData'];
-    public $name, $country, $logo, $updateData = false, $addData = false, $dataId = null;
-    public $serviceTypeId;
+    public $name, $phone,$email,$address,$instagram,$youtube,$facebook,$website,$twitter,$linkedin, $updateData = false, $addData = false, $dataId = null;
+    public $companyId;
     public $status = 1; 
     public $image;
 
@@ -31,19 +31,26 @@ class Details extends Component
     {
         // Find the destination with the given ID
         $serviceType = Company::find($id);
-
-        // Update the status of the destination
         $serviceType->status = !$serviceType->status;
         $serviceType->save();
-
-        // Refresh the page to show the updated status
         $this->mount();
     }
 
     public function resetFields()
     {
         $this->name = '';
-
+        $this->name =  '';
+        $this->image =  '';
+        $this->phone=  '';
+        $this->email= '';
+        $this->address= '';
+        $this->instagram= '';
+        $this->youtube= '';
+        $this->facebook= '';
+        $this->website= '';
+        $this->twitter= '';
+        $this->linkedin= '';
+        $this->companyId = '';
     }
 
     public function storePost()
@@ -51,7 +58,16 @@ class Details extends Component
       
         $validatedData = $this->validate([
             'name' => 'required',
-            'image' => 'required',
+            'image' => '',
+            'phone'=> '',
+            'email'=>'',
+            'address'=>'',
+            'instagram'=>'',
+            'youtube'=>'',
+            'facebook'=>'',
+            'website'=>'',
+            'twitter'=>'',
+            'linkedin'=>'',
            
         ]);
     
@@ -76,14 +92,23 @@ class Details extends Component
     public function editPost($id)
     {
         try {
-            $serviceType = Company::findOrFail($id);
-            if (!$serviceType) {
+            $company = Company::findOrFail($id);
+            if (!$company) {
                 $this->dispatchBrowserEvent('show-update-error');
                 //   session()->flash('error','Post not found');
             } else {
-                $this->name = $serviceType->name;
-               
-                $this->serviceTypeId = $serviceType->id;
+                $this->name = $company->name;
+                $this->image = $company->image;
+                $this->phone= $company->phone;
+                $this->email=$company->email;
+                $this->address=$company->address;
+                $this->instagram=$company->instagram;
+                $this->youtube=$company->youtube;
+                $this->facebook=$company->facebook;
+                $this->website=$company->website;
+                $this->twitter=$company->twitter;
+                $this->linkedin=$company->linkedin;
+                $this->companyId = $company->id;
                 $this->updateData = true;
                 $this->addData = false;
             }
@@ -97,9 +122,17 @@ class Details extends Component
        
         $validatedData = $this->validate([
             'name' => 'required',
+            'phone'=> '',
+            'email'=>'',
+            'address'=>'',
+            'instagram'=>'',
+            'youtube'=>'',
+            'facebook'=>'',
+            'website'=>'',
+            'twitter'=>'',
+            'linkedin'=>'',
         ]);
-    
-
+        
         if($this->image){
             if(!is_string($this->image)){
                 $save = $this->image->store('images', 'public');
@@ -108,7 +141,7 @@ class Details extends Component
         }
 
         try {
-            Company::whereId($this->serviceTypeId)->update($validatedData);
+            Company::whereId($this->companyId)->update($validatedData);
             $this->dispatchBrowserEvent('show-update-success');
             $this->resetFields();
             $this->updateData = false;

@@ -32,6 +32,7 @@ class Details extends Component
     public $status = 1;
     public $itineraries = [];
     public $company_id;
+    public $companies;
 
     public function render()
     {
@@ -42,10 +43,7 @@ class Details extends Component
 
     public function resetFields()
     {
-   
-        $this->price = '';
         $this->itineraries = [];
-     
     }
 
     public function changeStatus($id)
@@ -61,7 +59,7 @@ class Details extends Component
         $this->mount();
     }
 
-   
+
     public function removeFeature($index)
     {
         array_splice($this->features, $index, 1);
@@ -72,31 +70,29 @@ class Details extends Component
         $this->itineraries[] = '';
     }
 
-   
+
 
     public function removeItinerary($index)
     {
         array_splice($this->itineraries, $index, 1);
     }
 
-  
+
     public function storePost()
     {
         $validatedData = $this->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'employee_number' =>'',
-            'designation' =>'',
-            'department' =>'',
-            'phone_work' =>'',
-            'phone_personal' =>'',
-            'email_work' =>'email',
-            'photo' =>'',
-            'email_personal' =>'email',
-            'fax' =>'',
-            // 'photo'  => '',
-            // 'company_id' => '',
-            // 'key_itineraries' => '',
+            'employee_number' => '',
+            'designation' => '',
+            'department' => '',
+            'phone_work' => '',
+            'phone_personal' => '',
+            'email_work' => '',
+            'photo' => '',
+            'email_personal' => '',
+            'fax' => '',
+            'company_id' => 'required',
         ]);
 
         if ($this->photo) {
@@ -106,15 +102,15 @@ class Details extends Component
             }
         }
 
-        
+
         $validatedData['uuid'] = Str::uuid();
-        
+
         try {
 
-        Contact::create($validatedData);
-        $this->dispatchBrowserEvent('show-create-success');
-        $this->resetFields();
-        $this->addData = false;
+            Contact::create($validatedData);
+            $this->dispatchBrowserEvent('show-create-success');
+            $this->resetFields();
+            $this->addData = false;
         } catch (\Exception $ex) {
             $this->dispatchBrowserEvent('show-create-error');
         }
@@ -128,11 +124,11 @@ class Details extends Component
             if (!$service) {
                 $this->dispatchBrowserEvent('show-update-error');
             } else {
-                
+
                 $this->contactId = $service->id;
                 $this->first_name = $service->first_name;
                 $this->last_name = $service->last_name;
-                $this->price = $service->price;
+
                 $this->company_id = $service->company_id;
                 // $this->key_itineraries = json_decode($service->key_itineraries);
                 // $this->itineraries  = $this->key_itineraries;
@@ -151,18 +147,17 @@ class Details extends Component
         $validatedData = $this->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'employee_number' =>'',
-            'designation' =>'',
-            'department' =>'',
-            'phone_work' =>'',
-            'phone_personal' =>'',
-            'email_work' =>'email',
-            'photo' =>'',
-            'email_personal' =>'email',
-            'fax' =>'',
-            // 'photo'  => '',
-            // 'company_id' => '',
-            // 'key_itineraries' => '',
+            'employee_number' => '',
+            'designation' => '',
+            'department' => '',
+            'phone_work' => '',
+            'phone_personal' => '',
+            'email_work' => '',
+            'photo' => '',
+            'email_personal' => '',
+            'fax' => '',
+            'company_id' => 'required',
+
         ]);
 
         if ($this->photo) {
@@ -171,7 +166,7 @@ class Details extends Component
                 $validatedData['photo'] = $save;
             }
         }
-      
+
         // $validatedData['key_itineraries'] = json_encode($this->itineraries);
         try {
             Contact::whereId($this->contactId)->update($validatedData);
@@ -195,8 +190,7 @@ class Details extends Component
         $this->resetFields();
         $this->addData = true;
         $this->updateData = false;
-        
-
+        $this->companies =  Company::whereStatus(1)->get();
     }
 
     public function updateData()
@@ -204,7 +198,7 @@ class Details extends Component
 
         $this->updateData = true;
         $this->addData = false;
-     
+        $this->companies =  Company::whereStatus(1)->get();
     }
 
 

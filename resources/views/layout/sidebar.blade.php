@@ -21,7 +21,7 @@
             <span class="link-title">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item nav-category">web apps</li>
+        
      
         <li class="nav-item {{ active_class(['apps/chat']) }}">
           <a href="{{ route('company.list') }}" class="nav-link">
