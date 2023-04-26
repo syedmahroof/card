@@ -7,6 +7,7 @@ use App\Models\Contact;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
 
 
 class Details extends Component
@@ -15,26 +16,22 @@ class Details extends Component
     use WithPagination;
 
     protected $listeners = ['deleteConfirmed' => 'deleteData'];
-    public $title, $updateData = false, $updateStock = false, $addData = false, $dataId = null;
-    public $productId;
-    public $category_id;
-    public $tag_line;
-    public $categories;
-    public $projects;
-    public $type;
-    public $project_id;
-    public $image;
-    public $stock;
-    public $value;
-    public $price;
+    public $first_name, $last_name, $updateData = false, $addData = false, $dataId = null;
+    public $contactId;
+    public $employee_number;
+    public $designation;
+    public $department;
+    public $phone_work;
+    public $phone_personal;
+    public $email_work;
+    public $photo;
+    public $email_personal;
+    public $fax;
     public $key_itineraries;
-    public $location;
+    public $address;
     public $status = 1;
-    public $features = [];
     public $itineraries = [];
-    public $inclusions = [];
-    public $exclusions = [];
-    public $destination_id;
+    public $company_id;
 
     public function render()
     {
@@ -45,15 +42,10 @@ class Details extends Component
 
     public function resetFields()
     {
-        $this->title = '';
-      
-        $this->tag_line = '';
+   
         $this->price = '';
-    
-        $this->features = [];
         $this->itineraries = [];
-        $this->inclusions = [];
-        $this->exclusions = [];
+     
     }
 
     public function changeStatus($id)
@@ -69,11 +61,7 @@ class Details extends Component
         $this->mount();
     }
 
-    public function addFeature()
-    {
-        $this->features[] = '';
-    }
-
+   
     public function removeFeature($index)
     {
         array_splice($this->features, $index, 1);
@@ -84,60 +72,52 @@ class Details extends Component
         $this->itineraries[] = '';
     }
 
-    public function addExclusion()
-    {
-        $this->exclusions[] = '';
-    }
-
-    public function addInclusion()
-    {
-        $this->inclusions[] = '';
-    }
+   
 
     public function removeItinerary($index)
     {
         array_splice($this->itineraries, $index, 1);
     }
 
-    public function removeExclusion($index)
-    {
-        array_splice($this->itineraries, $index, 1);
-    }
-
-    public function removeInclusion($index)
-    {
-        array_splice($this->itineraries, $index, 1);
-    }
-
+  
     public function storePost()
     {
         $validatedData = $this->validate([
-            'title' => 'required',
-            'price' => 'required',
-            'image'  => 'required',
-            'category_id' => '',
-         
-            'key_itineraries' => '',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'employee_number' =>'',
+            'designation' =>'',
+            'department' =>'',
+            'phone_work' =>'',
+            'phone_personal' =>'',
+            'email_work' =>'email',
+            'photo' =>'',
+            'email_personal' =>'email',
+            'fax' =>'',
+            // 'photo'  => '',
+            // 'company_id' => '',
+            // 'key_itineraries' => '',
         ]);
 
-        if ($this->image) {
-            if (!is_string($this->image)) {
-                $save = $this->image->store('images', 'public');
-                $validatedData['image'] = $save;
+        if ($this->photo) {
+            if (!is_string($this->photo)) {
+                $save = $this->photo->store('images', 'public');
+                $validatedData['photo'] = $save;
             }
         }
-        
-        $validatedData['key_itineraries'] = json_encode($this->itineraries);
 
-        // try {
+        
+        $validatedData['uuid'] = Str::uuid();
+        
+        try {
 
         Contact::create($validatedData);
         $this->dispatchBrowserEvent('show-create-success');
         $this->resetFields();
         $this->addData = false;
-        // } catch (\Exception $ex) {
-        //     $this->dispatchBrowserEvent('show-create-error');
-        // }
+        } catch (\Exception $ex) {
+            $this->dispatchBrowserEvent('show-create-error');
+        }
     }
 
 
@@ -149,12 +129,13 @@ class Details extends Component
                 $this->dispatchBrowserEvent('show-update-error');
             } else {
                 
-                $this->productId = $service->id;
-                $this->title = $service->title;
+                $this->contactId = $service->id;
+                $this->first_name = $service->first_name;
+                $this->last_name = $service->last_name;
                 $this->price = $service->price;
-                $this->category_id = $service->category_id;
-                $this->key_itineraries = json_decode($service->key_itineraries);
-                $this->itineraries  = $this->key_itineraries;
+                $this->company_id = $service->company_id;
+                // $this->key_itineraries = json_decode($service->key_itineraries);
+                // $this->itineraries  = $this->key_itineraries;
 
                 $this->updateData();
             }
@@ -163,47 +144,37 @@ class Details extends Component
         }
     }
 
-    public function updateStock($id)
-    {
-       
-        try {
-            $service = Contact::findOrFail($id);
-            if (!$service) {
-                $this->dispatchBrowserEvent('show-update-error');
-            } else {
-                $this->productId = $id;
-                $this->title = $service->title;
-                $this->stock  = $this->stock;
-                $this->updateData = false;
-                $this->addData = false;
-                $this->updateStock = true;
-                $this->projects =  Project::whereStatus(1)->get();
-                
-            }
-        } catch (\Exception $ex) {
-            $this->dispatchBrowserEvent('show-update-error');
-        }
-    }
+
 
     public function updatePost()
     {
         $validatedData = $this->validate([
-            'title' => 'required',
-            'price' => 'required',
-            'category_id' => '',
-            'key_itineraries' => '',
-
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'employee_number' =>'',
+            'designation' =>'',
+            'department' =>'',
+            'phone_work' =>'',
+            'phone_personal' =>'',
+            'email_work' =>'email',
+            'photo' =>'',
+            'email_personal' =>'email',
+            'fax' =>'',
+            // 'photo'  => '',
+            // 'company_id' => '',
+            // 'key_itineraries' => '',
         ]);
 
-        if ($this->image) {
-            if (!is_string($this->image)) {
-                $save = $this->image->store('images', 'public');
-                $validatedData['image'] = $save;
+        if ($this->photo) {
+            if (!is_string($this->photo)) {
+                $save = $this->photo->store('images', 'public');
+                $validatedData['photo'] = $save;
             }
         }
-        $validatedData['key_itineraries'] = json_encode($this->itineraries);
+      
+        // $validatedData['key_itineraries'] = json_encode($this->itineraries);
         try {
-            Contact::whereId($this->productId)->update($validatedData);
+            Contact::whereId($this->contactId)->update($validatedData);
             $this->dispatchBrowserEvent('show-update-success');
             $this->resetFields();
             $this->updateData = false;
@@ -215,7 +186,7 @@ class Details extends Component
     {
         $this->addData = false;
         $this->updateData = false;
-        $this->updateStock = false;
+
         $this->resetFields();
     }
 
@@ -224,8 +195,8 @@ class Details extends Component
         $this->resetFields();
         $this->addData = true;
         $this->updateData = false;
-        $this->updateStock = false;
-        $this->categories =  Company::all();
+        
+
     }
 
     public function updateData()
@@ -233,13 +204,9 @@ class Details extends Component
 
         $this->updateData = true;
         $this->addData = false;
-        $this->updateStock = false;
-        $this->categories =  Company::whereNull('parent_id')->get();
+     
     }
 
-    public function updatedServiceTypeId($value)
-    {
-    }
 
     public function confirmData($dataId)
     {

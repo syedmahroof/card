@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\HomeController;
 use Illuminate\Http\Request;
 
 /*
@@ -16,3 +17,21 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::any('card_info', [HomeController::class, 'cardInfo']);
+
+
+Route::controller(AuthController::class)->group(function () {
+    Route::post('/login-with-otp/send', 'sendOTP');
+    Route::post('/login-with-otp/verify', 'verifyOTP');
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('update-profile',[ AuthController::class,'updateProfile']);
+    Route::any('profile',[ AuthController::class,'profile']);
+    Route::post('logout',[ AuthController::class,'logout']);
+
+});
+
+

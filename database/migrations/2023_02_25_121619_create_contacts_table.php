@@ -21,12 +21,13 @@ return new class extends Migration
             $table->text('department')->nullable();
             $table->text('phone_work')->nullable();
             $table->text('phone_personal')->nullable();
-            $table->text('email-work')->nullable();
+            $table->text('email_work')->nullable();
             $table->text('email_personal')->nullable();
+            $table->text('status')->nullable();
             $table->text('fax')->nullable();
             $table->text('photo')->nullable();
             $table->text('Address')->nullable();
-            $table->text('Employee number')->nullable();
+            $table->text('employee_number')->nullable();
             $table->text('UUID')->nullable();
             $table->unsignedBigInteger('company_id')->nullable();
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');

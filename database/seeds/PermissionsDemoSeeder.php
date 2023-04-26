@@ -21,22 +21,20 @@ class PermissionsDemoSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'view agents']);
-        Permission::create(['name' => 'create agents']);
-        Permission::create(['name' => 'delete agents']);
-        Permission::create(['name' => 'view properties']);
+        Permission::create(['name' => 'settings']);
+        // Permission::create(['name' => 'create agents']);
+        // Permission::create(['name' => 'delete agents']);
+        // Permission::create(['name' => 'view properties']);
 
         // create roles and assign existing permissions
         $role1 = Role::create(['name' => 'admin']);
-        $role1->givePermissionTo('view agents');
-        $role1->givePermissionTo('create agents');
-
-        $role2 = Role::create(['name' => 'agents']);
-        $role2->givePermissionTo('view properties');
+        // $role1->givePermissionTo('settings');
+        // $role1->givePermissionTo('create agents');
+        // $role2 = Role::create(['name' => 'agents']);
+        // $role2->givePermissionTo('view properties');
 
         $role3 = Role::create(['name' => 'Super-Admin']);
         // gets all permissions via Gate::before rule; see AuthServiceProvider
-
         // create demo users
         $user = User::create([
             'first_name' => 'Example User',
@@ -45,12 +43,12 @@ class PermissionsDemoSeeder extends Seeder
         ]);
         $user->assignRole($role1);
 
-        $user = User::create([
-            'first_name' => 'Example Admin User',
-            'email' => 'admin@example.com',
-            'password' => bcrypt("123456"),
-        ]);
-        $user->assignRole($role2);
+        // $user = User::create([
+        //     'first_name' => 'Example Admin User',
+        //     'email' => 'admin@example.com',
+        //     'password' => bcrypt("123456"),
+        // ]);
+        // $user->assignRole($role2);
 
         $user = User::create([
             'first_name' => 'Example Super-Admin User',

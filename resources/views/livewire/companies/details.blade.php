@@ -21,7 +21,7 @@
                                 <tr>
                                     <th></th>
                                     <th>Name</th>
-                                   
+
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -42,34 +42,33 @@
                                                 </div>
 
                                             </td>
-                                          
 
-                                        <td>
-                                            <div>
-                                                @if ($company->status == 1)
-                                                    <span class="badge bg-success">Active</span>
-                                                @else
-                                                    <span class="badge bg-danger">Inactive</span>
-                                                @endif
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button wire:click="viewData({{ $company->id }})"
-                                                class="btn btn-primary btn-sm">View</button>
-                                            <button wire:click="editPost({{ $company->id }})"
-                                                class="btn btn-primary btn-sm">Edit</button>
-                                           <button
-                                                    wire:click="confirmData({{ $company->id }})"
+
+                                            <td>
+                                                <div>
+                                                    @if ($company->status == 1)
+                                                        <span class="badge bg-success">Active</span>
+                                                    @else
+                                                        <span class="badge bg-danger">Inactive</span>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button wire:click="viewData({{ $company->id }})"
+                                                    class="btn btn-primary btn-sm">View</button>
+                                                <button wire:click="editPost({{ $company->id }})"
+                                                    class="btn btn-primary btn-sm">Edit</button>
+                                                <button wire:click="confirmData({{ $company->id }})"
                                                     class="btn btn-danger btn-sm">Delete</button>
-                                            <button wire:click="changeStatus({{ $company->id }})"
-                                                class="btn btn-secondary btn-sm">
-                                                @if ($company->status)
-                                                    Deactivate
-                                                @else
-                                                    Activate
-                                                @endif
-                                            </button>
-                                        </td>
+                                                <button wire:click="changeStatus({{ $company->id }})"
+                                                    class="btn btn-secondary btn-sm">
+                                                    @if ($company->status)
+                                                        Deactivate
+                                                    @else
+                                                        Activate
+                                                    @endif
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -78,28 +77,27 @@
                                             No Posts Found.
                                         </td>
                                     </tr>
-                                    @endif
-                                </tbody>
-                            </table>
-                        </div>
-                        {{ $companies->links() }}
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
-
+                    {{ $companies->links() }}
                 </div>
 
             </div>
 
-
-            @if ($addData)
-                @include('livewire.companies.create')
-            @endif
-            @if ($updateData)
-
-                @include('livewire.companies.update')
-            @endif
-
         </div>
+
+
+        @if ($addData)
+            @include('livewire.companies.create')
+        @endif
+        @if ($updateData)
+            @include('livewire.companies.update')
+        @endif
+
     </div>
+</div>
 
 
-    <x-confirmation-alert />
+<x-confirmation-alert />

@@ -35,12 +35,17 @@
             <span class="link-title">Contacts</span>
           </a>
         </li>
-        <li class="nav-item {{ active_class(['apps/calendar']) }}">
-          <a href="{{ route('contact.list') }}" class="nav-link">
-            <i class="link-icon" data-feather="anchor"></i>
-            <span class="link-title">Settings</span>
-          </a>
-        </li>
+
+        @if(Auth::user()->can('settings'))
+          <li class="nav-item {{ active_class(['apps/calendar']) }}">
+            <a href="{{ route('contact.list') }}" class="nav-link">
+              <i class="link-icon" data-feather="anchor"></i>
+              <span class="link-title">Settings</span>
+            </a>
+          </li>
+        @endif
+
+       
       </ul>
     </div>
   </nav>
