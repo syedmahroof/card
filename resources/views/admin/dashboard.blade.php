@@ -11,7 +11,7 @@
             <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
         </div>
         <div class="d-flex align-items-center flex-wrap text-nowrap">
-            <div class="input-group date datepicker wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
+            {{-- <div class="input-group date datepicker wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
                 <span class="input-group-text input-group-addon bg-transparent border-primary"><i data-feather="calendar"
                         class=" text-primary"></i></span>
                 <input type="text" class="form-control border-primary bg-transparent">
@@ -23,7 +23,7 @@
             <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
                 <i class="btn-icon-prepend" data-feather="download-cloud"></i>
                 Download Report
-            </button>
+            </button> --}}
         </div>
     </div>
 
@@ -34,7 +34,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-baseline">
-                                <h6 class="card-title mb-0">New Customers</h6>
+                                <h6 class="card-title mb-0">Contacts</h6>
                                 <div class="dropdown mb-2">
                                     <button class="btn p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
@@ -80,7 +80,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-baseline">
-                                <h6 class="card-title mb-0">New Orders</h6>
+                                <h6 class="card-title mb-0">Companies</h6>
                                 <div class="dropdown mb-2">
                                     <button class="btn p-0" type="button" id="dropdownMenuButton1"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -173,7 +173,7 @@
     </div>
 
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-lg-5 col-xl-4 grid-margin grid-margin-xl-0 stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -376,7 +376,7 @@
                 </div>
             </div>
         </div>
-    </div> <!-- row -->
+    </div> --}}
 @endsection
 
 @push('plugin-scripts')

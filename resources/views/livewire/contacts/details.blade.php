@@ -36,7 +36,7 @@
                                         <tr>
                                             <td class="py-1">
                                                 <img class="custome-table-img" src="{{ asset($contact->photo) }}"
-                                                    alt="image">
+                                                    alt="image" onerror="this.onerror=null;this.src='{{asset('frontend/img/no-img.png')}}';">
                                             </td>
                                             <td>
                                                 <div>
@@ -86,18 +86,19 @@
                                             <td>
                                                 {{-- <button wire:click="viewData({{ $contact->id }})"
                                                     class="btn btn-primary btn-xs btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top"><i data-feather="edit"></i></button> --}}
-                                                <button wire:click="editPost({{ $contact->id }})"
+                                                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" wire:click="editPost({{ $contact->id }})"
                                                     class="btn btn-primary  btn-xs btn-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
-                                                <button wire:click="confirmData({{ $contact->id }})"
+                                                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" wire:click="confirmData({{ $contact->id }})"
                                                     class="btn btn-danger  btn-xs btn-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
-                                                <button wire:click="changeStatus({{ $contact->id }})"
-                                                    class="btn btn-secondary btn-xs btn-icon">
-                                                    {{-- @if ($contact->status)
-                                                    <i data-feather="check-square"></i>
+                                                <button data-bs-toggle="tooltip" data-bs-placement="top" title="Change Status" wire:click="changeStatus({{ $contact->id }})"
+                                                    class="btn  @if ($contact->status ==1) btn-secondary @else btn-light  @endif btn-xs btn-icon">
+                                                    
+                                                    @if ($contact->status ==1)
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-down"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg>
                                                     @else
-                                                    <i data-feather="check-square"></i>
-                                                    @endif --}}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                                                    @endif
                                                 </button>
 
                                             </td>
