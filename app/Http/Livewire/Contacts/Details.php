@@ -219,7 +219,7 @@ class Details extends Component
     public function viewData($id)
     {
         try {
-            return redirect()->route('view.manufacture', ['id' => $id, 'viewflag' => 1]);
+            return redirect()->route('company.view', ['id' => $id, 'viewflag' => 1]);
         } catch (\Exception $ex) {
             session()->flash('error', 'Something goes wrong!!');
         }

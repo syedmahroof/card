@@ -15,7 +15,7 @@
   
 
        
-        <li class="nav-item {{ active_class(['/']) }}">
+        <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
           <a href="{{ url('/dashboard') }}" class="nav-link">
             <i class="link-icon" data-feather="box"></i>
             <span class="link-title">Dashboard</span>
@@ -23,13 +23,13 @@
         </li>
         
      
-        <li class="nav-item {{ active_class(['apps/chat']) }}">
+        <li class="nav-item {{ request()->routeIs('company.list') ? 'active' : '' }}">
           <a href="{{ route('company.list') }}" class="nav-link">
             <i class="link-icon" data-feather="message-square"></i>
             <span class="link-title">Companies</span>
           </a>
         </li>
-        <li class="nav-item {{ active_class(['apps/calendar']) }}">
+        <li class="nav-item {{ request()->routeIs('contact.list') ? 'active' : '' }}">
           <a href="{{ route('contact.list') }}" class="nav-link">
             <i class="link-icon" data-feather="book"></i>
             <span class="link-title">Contacts</span>

@@ -6,8 +6,8 @@
 
 @section('content')
 
-@livewire('manufactures.view',['id'=>$id,'viewFlag' => $viewFlag])
-<!-- row -->
+
+
 @endsection
 
 @push('plugin-scripts')

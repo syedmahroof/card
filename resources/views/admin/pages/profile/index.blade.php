@@ -15,7 +15,6 @@
 
 @livewire('create-profile')
 
-
 @endsection
 
 @push('plugin-scripts')

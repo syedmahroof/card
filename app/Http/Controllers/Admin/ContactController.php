@@ -13,5 +13,11 @@ class ContactController extends Controller
     {
         return view('admin.pages.contacts.index',['$type' => $type]);
     }
+
+
+    public function view($id)
+    {
+        return view('admin.pages.contacts.view',compact('id'));
+    }
   
 }

@@ -46,10 +46,12 @@ Route::group(['namespace' => "Admin"], function () {
 
         Route::controller(CompanyController::class)->group(function () {
             Route::get('company-list', 'index')->name('company.list');
+            Route::get('view-company/{id}', 'view')->name('company.view');
         });
 
         Route::controller(ContactController::class)->group(function () {
             Route::get('contact-list/{type?}', 'index')->name('contact.list');
+            Route::get('view-contact/{id}', 'view')->name('contact.view');
         });
     });
 });
